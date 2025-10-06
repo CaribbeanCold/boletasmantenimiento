@@ -75,12 +75,13 @@ function establecerFechaLocal() {
 // Agrega una fila de voltaje a la tabla
 function agregarFilaVoltaje() {
   const tabla = document.getElementById("tablaVoltajes").querySelector("tbody");
+  if (!tabla) return;
   const fila = document.createElement("tr");
   fila.innerHTML = `
     <td><input type="text" placeholder="Lectura"></td>
-    <td><input type="text" value="L1-L2"></td>
-    <td><input type="text"></td>
-    <td><button onclick="eliminarFila(this)">➖</button></td>
+    <td><input type="text" placeholder="Placas"></td>
+    <td><input type="text" placeholder="Voltaje control"></td>
+    <td><button type="button" onclick="eliminarFila(this)">➖</button></td>
   `;
   tabla.appendChild(fila);
 }
