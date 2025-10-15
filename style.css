@@ -135,3 +135,107 @@ button:hover {
     min-height: 60px;
   }
 }
+
+/* Estilos para impresión y PDF */
+@media print {
+  body {
+    background: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .contenedor {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    page-break-inside: avoid;
+  }
+  h1, h2 {
+    color: #0077b6 !important;
+    page-break-after: avoid;
+    page-break-before: avoid;
+  }
+  .botones-final, button {
+    display: none !important; /* Oculta los botones al imprimir */
+  }
+  table, tr, td, th {
+    page-break-inside: avoid !important;
+  }
+  .form-row, .fila-doble {
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  textarea {
+    min-height: 40px !important;
+    resize: none !important;
+  }
+}
+
+/* Evita cortes incómodos en tablas y secciones */
+.contenedor, table, tr, td, th, h2, h1 {
+  page-break-inside: avoid;
+}
+.contenedor::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('cc 1.png'); /* Usa el nombre exacto de tu archivo */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% auto;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+.marca-agua {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+}
+.marca-agua img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.contenedor {
+  position: relative;
+}
+.contenedor > *:not(.marca-agua) {
+  position: relative;
+  z-index: 1;
+}
+.marca-agua-cert {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  max-width: 500px;
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+}
+.botones-final {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.botones-final button {
+  font-size: 1.5em;
+  padding: 10px 20px;
+  border-radius: 12px;
+  min-width: 200px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
