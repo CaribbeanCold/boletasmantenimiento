@@ -6,14 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css">
   <style>
-
-    body {
-      background-color: #f4f8fb;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      padding: 30px;
-    }
-
+    /* Puedes mover estos estilos a style.css si prefieres */
     .contenedor {
       max-width: 900px;
       margin: auto;
@@ -21,89 +14,11 @@
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      width: 210mm; /* ancho A4 */
-      min-height: 297mm; /* alto A4 */
+      width: 100%;
+      min-height: 297mm;
       box-sizing: border-box;
-      padding: 8mm;
-      overflow: visible;
+      position: relative;
     }
-
-    h1 {
-      margin: 0;
-      color: #007bff;
-    }
-
-    h2 {
-      color: #007bff;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 5px;
-      margin-top: 30px;
-    }
-
-    label {
-      font-weight: bold;
-      color: #333;
-    }
-
-    input[type="text"],
-    input[type="date"],
-    select,
-    textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 15px;
-    }
-
-    input[type="checkbox"] {
-      margin-right: 8px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-
-    th, td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    button {
-      padding: 12px 24px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .btn-verde {
-      background-color: #28a745;
-      color: white;
-    }
-
-    .btn-rojo {
-      background-color: #dc3545;
-      color: white;
-    }
-
-    .botones-final {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    textarea {
-      resize: none;
-    }
-
-    /* Mejoras para la tabla de voltajes */
     #tablaVoltajes td input[type="text"] {
       width: 100%;
       box-sizing: border-box;
@@ -113,37 +28,29 @@
       border: 1px solid #ccc;
       margin: 0;
     }
-
     #tablaVoltajes th, #tablaVoltajes td {
       min-width: 120px;
       max-width: 180px;
       word-break: break-word;
       vertical-align: middle;
     }
-
     #tablaVoltajes {
       table-layout: fixed;
     }
   </style>
 </head>
 <body>
-
   <div class="contenedor">
     <div id="boletaPDF">
-      <!-- Número de Boleta -->
       <div style="text-align: right; font-weight: bold; font-size: 18px; margin-bottom: 10px;">
         No: <span id="numeroBoleta">0001</span>
       </div>
-
-      <!-- Encabezado -->
       <div class="header">
         <h1>📋 Mantenimientos de Aires Acondicionados</h1>
         <div class="factura">
           Factura Nº: <input type="text" id="factura">
         </div>
       </div>
-
-      <!-- Datos Cliente -->
       <h2>Datos del Cliente</h2>
       <div style="display: flex; gap: 40px; margin-bottom: 10px;">
         <div style="flex: 1;">
@@ -165,8 +72,6 @@
           <input type="date" id="fecha" name="fecha">
         </div>
       </div>
-
-      <!-- Certificados -->
       <h2>📄 Certificados</h2>
       <div style="display: flex; gap: 40px;">
         <div style="flex: 1;">
@@ -178,8 +83,6 @@
           <label><input type="checkbox" id="certArranque"> Arranque</label><br>
         </div>
       </div>
-
-      <!-- Tipo de sistema -->
       <h2>Tipo de Sistema</h2>
       <div style="display: flex; flex-wrap: wrap; gap: 10px;">
         <label><input type="checkbox" name="sistema" value="Mini Split"> Mini Split</label>
@@ -191,8 +94,6 @@
         <label><input type="checkbox" name="sistema" value="Chiller"> Chiller</label>
         <label><input type="checkbox" name="sistema" value="Otros"> Otros</label>
       </div>
-
-      <!-- Datos del Sistema -->
       <h2>⚙️ Datos del Sistema</h2>
       <label>Tipo de sistema:
         <select id="tipoSistema">
@@ -203,7 +104,6 @@
         </select>
       </label><br>
       <label>Marca: <input type="text" id="marca"></label><br>
-
       <div style="display: flex; gap: 10px;">
         <label>Modelo EVAP: <input type="text" id="modeloEvap"></label>
         <label>Serie EVAP: <input type="text" id="serieEvap"></label>
@@ -212,8 +112,6 @@
         <label>Modelo COND: <input type="text" id="modeloCond"></label>
         <label>Serie COND: <input type="text" id="serieCond"></label>
       </div>
-
-      <!-- Voltajes -->
       <h2>⚡ Lecturas de Voltaje</h2>
       <table id="tablaVoltajes">
         <thead>
@@ -229,13 +127,11 @@
             <td><input type="text" placeholder="Lectura"></td>
             <td><input type="text" value="L1-L2"></td>
             <td><input type="text"></td>
-            <td><button onclick="eliminarFila(this)">➖</button></td>
+            <td><button type="button" onclick="eliminarFila(this)">➖</button></td>
           </tr>
         </tbody>
       </table>
-      <button onclick="agregarFilaVoltaje()">➕ Agregar fila de voltaje</button>
-
-      <!-- Revisiones -->
+      <button type="button" onclick="agregarFilaVoltaje()">➕ Agregar fila de voltaje</button>
       <h2>🔍 Revisiones</h2>
       <div style="display: flex; justify-content: space-between; gap: 40px;">
         <div>
@@ -255,8 +151,6 @@
           <label><input type="checkbox"> Filtro deshidratador y visor</label><br>
         </div>
       </div>
-
-      <!-- Revisiones Generales -->
       <h2>🧾 Revisiones Generales</h2>
       <div style="display: flex; gap: 40px; margin-bottom: 20px;">
         <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
@@ -268,79 +162,110 @@
           <label><input type="checkbox"> Se entrega control remoto, manual y certificados de trabajo</label>
         </div>
       </div>
-
-     <!-- Observaciones -->
-<h2 style="text-align: center; color: #007bff;">📝 Observaciones</h2>
-<div style="display: flex; justify-content: center;">
-  <textarea id="observaciones" rows="4" cols="50" placeholder="Escribe aquí las observaciones del servicio..." style="padding: 10px; font-size: 16px;"></textarea>
-</div>
-
-    <!-- Botones -->
-    <div class="botones-final">
-      <!-- Botón para guardar PDF -->
-<button class="btn-verde" onclick="guardarPDF()">✅ Guardar PDF</button>
-
-      <button class="btn-rojo" onclick="window.location.href='index.html'">⬅️ Volver al menú principal</button>
+      <h2 style="text-align: center; color: #007bff;">📝 Observaciones</h2>
+      <div style="display: flex; justify-content: center;">
+        <textarea id="observaciones" rows="4" cols="50" placeholder="Escribe aquí las observaciones del servicio..." style="padding: 10px; font-size: 16px;"></textarea>
+      </div>
+      <div class="botones-final">
+        <button class="btn-verde" onclick="guardarFormulario()">✅ Guardar PDF</button>
+        <button class="btn-rojo" onclick="window.location.href='index.html'">⬅️ Volver al menú principal</button>
+      </div>
     </div>
   </div>
-
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script>
-  function guardarPDF() {
-    // Validación de campos obligatorios
-    const campos = [
-      { id: "cliente", nombre: "Cliente" },
-      { id: "direccion", nombre: "Dirección" },
-      { id: "telefono", nombre: "Teléfono" }
-    ];
-    let faltantes = [];
-    campos.forEach(campo => {
-      const input = document.getElementById(campo.id);
-      if (!input || !input.value.trim()) {
-        faltantes.push(campo.nombre);
-        if (input) input.style.border = "2px solid red";
-      } else {
-        input.style.border = ""; // Quita el rojo si está bien
+  <script>
+    // Inicializa y muestra el número de boleta al cargar
+    window.addEventListener("DOMContentLoaded", () => {
+      if (!localStorage.getItem("numeroBoleta")) {
+        localStorage.setItem("numeroBoleta", "1");
       }
+      mostrarNumeroBoleta();
+      establecerFechaLocal();
     });
-    if (faltantes.length > 0) {
-      alert("Por favor completa los siguientes campos:\n\n" + faltantes.join("\n"));
-      return;
+
+    function mostrarNumeroBoleta() {
+      const el = document.getElementById("numeroBoleta");
+      const num = parseInt(localStorage.getItem("numeroBoleta")) || 1;
+      if (el) el.textContent = String(num).padStart(4, "0");
     }
 
-    // Abre la ventana de impresión
-    window.print();
-  }
+    function establecerFechaLocal() {
+      const ahora = new Date();
+      const fechaGMT6 = ahora.toLocaleDateString('en-CA', {
+        timeZone: 'America/Belize'
+      });
+      const campoFecha = document.getElementById("fecha");
+      if (campoFecha) campoFecha.value = fechaGMT6;
+    }
 
-  // Establece la fecha actual en GMT-6 al cargar la página
-  function establecerFechaLocal() {
-    const ahora = new Date();
-    const fechaGMT6 = ahora.toLocaleDateString('en-CA', {
-      timeZone: 'America/Belize'
-    });
-    const campoFecha = document.getElementById("fecha");
-    if (campoFecha) campoFecha.value = fechaGMT6;
-  }
+    function guardarFormulario() {
+      // Validación de campos obligatorios
+      const campos = [
+        { id: "cliente", nombre: "Cliente" },
+        { id: "direccion", nombre: "Dirección" },
+        { id: "telefono", nombre: "Teléfono" }
+      ];
+      let faltantes = [];
+      campos.forEach(campo => {
+        const input = document.getElementById(campo.id);
+        if (!input || !input.value.trim()) {
+          faltantes.push(campo.nombre);
+          if (input) input.style.border = "2px solid red";
+        } else {
+          input.style.border = ""; // Quita el rojo si está bien
+        }
+      });
+      if (faltantes.length > 0) {
+        alert("Por favor completa los siguientes campos:\n\n" + faltantes.join("\n"));
+        return;
+      }
 
-  window.addEventListener("DOMContentLoaded", establecerFechaLocal);
+      window.print(); // Imprime la boleta
 
-  function agregarFilaVoltaje() {
-  const tabla = document.getElementById("tablaVoltajes").querySelector("tbody");
-  if (!tabla) return;
-  const fila = document.createElement("tr");
-  fila.innerHTML = `
-    <td><input type="text" placeholder="Lectura"></td>
-    <td><input type="text" placeholder="Placas"></td>
-    <td><input type="text" placeholder="Voltaje control"></td>
-    <td><button type="button" onclick="eliminarFila(this)">➖</button></td>
-  `;
-  tabla.appendChild(fila);
-}
+      // Incrementa el contador y actualiza el número
+      let num = parseInt(localStorage.getItem("numeroBoleta")) || 1;
+      num++;
+      localStorage.setItem("numeroBoleta", num);
+      mostrarNumeroBoleta();
 
-function eliminarFila(boton) {
-  boton.closest("tr").remove();
-}
-</script>
+      limpiarFormulario(); // Limpia el formulario para la siguiente boleta
+    }
+
+    function limpiarFormulario() {
+      const campos = ["cliente", "direccion", "telefono", "factura", "marca", "modeloEvap", "serieEvap", "modeloCond", "serieCond", "observaciones"];
+      campos.forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) campo.value = "";
+      });
+
+      // Desmarca todos los checkboxes
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+
+      // Limpia las filas de voltaje y deja solo la primera
+      const tabla = document.getElementById("tablaVoltajes")?.querySelector("tbody");
+      if (tabla) {
+        while (tabla.rows.length > 1) {
+          tabla.deleteRow(1);
+        }
+        Array.from(tabla.rows[0].querySelectorAll('input')).forEach(input => input.value = "");
+      }
+    }
+
+    function agregarFilaVoltaje() {
+      const tabla = document.getElementById("tablaVoltajes").querySelector("tbody");
+      if (!tabla) return;
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <td><input type="text" placeholder="Lectura"></td>
+        <td><input type="text" placeholder="Placas"></td>
+        <td><input type="text" placeholder="Voltaje control"></td>
+        <td><button type="button" onclick="eliminarFila(this)">➖</button></td>
+      `;
+      tabla.appendChild(fila);
+    }
+
+    function eliminarFila(boton) {
+      boton.closest("tr").remove();
+    }
+  </script>
 </body>
 </html>
